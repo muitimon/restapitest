@@ -1,0 +1,8 @@
+version: "2"
+services:
+  api:
+    build: ./
+    container_name: restapitest
+    ports:
+      - 9292:9292
+    tty: true
