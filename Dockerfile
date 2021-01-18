@@ -10,4 +10,4 @@ RUN gem install webrick
 RUN gem install grape
 RUN gem install rack
 
-CMD rackup
+CMD rackup --host 0.0.0.0
