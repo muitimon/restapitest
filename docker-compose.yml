@@ -1,8 +1,25 @@
-version: "2"
+version: "3"
 services:
-  api:
-    build: ./
-    container_name: restapitest
+  db:
+    container_name: restapi_test_db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: root
     ports:
-      - 9292:9292
+      - 3306:3306
+    volumes:
+      - "./mysql_data:/var/lib/mysql"
+  app:
+    build: ./
+    container_name: restapi_test_app
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
     tty: true
+    # command: rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - "./app:/home/app"
+    # command: bundle exec rails s -p 3000 -b '0.0.0.0'
+
